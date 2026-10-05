@@ -1,0 +1,10 @@
+{
+  "id": "knowledge-nav",
+  "name": "Knowledge Nav",
+  "version": "0.1.0",
+  "minAppVersion": "1.4.0",
+  "description": "Generate a knowledge-point-level navigation block at the top of a note, where each link's display text is a distilled knowledge point rather than a heading.",
+  "author": "SusuYF",
+  "authorUrl": "https://github.com/SusuYF",
+  "isDesktopOnly": false
+}

@@ -1,0 +1,20 @@
+# Build output — generated from ./src, shipped via GitHub releases only
+main.js
+*.js.map
+tests/run.js
+tests/e2e.js
+
+# Dependencies
+node_modules/
+
+# OS noise
+.DS_Store
+Thumbs.db
+
+# Local test vault (used to manually verify the plugin in a real Obsidian)
+test-vault/
+
+# Hard rule: real personal notes must never enter this repo.
+# Test fixtures are synthetic only — see tests/fixtures/.
+_notes/
+*.personal.md

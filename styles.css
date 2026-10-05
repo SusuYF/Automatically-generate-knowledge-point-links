@@ -1,0 +1,89 @@
+/* Knowledge Nav — preview modal styling.
+   Uses Obsidian CSS variables so it follows the active theme. */
+
+.knowledge-nav-preview h2 {
+	margin-top: 0;
+}
+
+.knowledge-nav-preview h3 {
+	margin: 16px 0 8px;
+	font-size: 1em;
+}
+
+.knowledge-nav-preview .kn-box {
+	border: 1px solid var(--background-modifier-border);
+	border-radius: 6px;
+	padding: 12px;
+	margin-bottom: 16px;
+	background: var(--background-secondary);
+}
+
+.knowledge-nav-preview .kn-table {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 0.9em;
+}
+
+.knowledge-nav-preview .kn-table td {
+	padding: 2px 8px 2px 0;
+	vertical-align: top;
+}
+
+.knowledge-nav-preview .kn-table td:last-child {
+	text-align: right;
+	white-space: nowrap;
+}
+
+.knowledge-nav-preview .kn-pass {
+	color: var(--text-success);
+}
+
+.knowledge-nav-preview .kn-fail {
+	color: var(--text-error);
+}
+
+.knowledge-nav-preview .kn-code {
+	max-height: 320px;
+	overflow: auto;
+	padding: 10px;
+	border-radius: 6px;
+	background: var(--background-primary-alt);
+	border: 1px solid var(--background-modifier-border);
+	font-size: 0.85em;
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.knowledge-nav-preview .kn-code code {
+	background: none;
+	padding: 0;
+}
+
+.knowledge-nav-preview .kn-problems {
+	margin: 8px 0 0;
+	padding-left: 20px;
+	color: var(--text-error);
+	font-size: 0.9em;
+}
+
+.knowledge-nav-preview .kn-inserts {
+	font-size: 0.9em;
+	font-family: var(--font-monospace);
+}
+
+.knowledge-nav-preview .kn-muted {
+	color: var(--text-muted);
+	font-size: 0.9em;
+}
+
+.knowledge-nav-preview .kn-buttons {
+	display: flex;
+	gap: 8px;
+	justify-content: flex-end;
+	margin-top: 16px;
+}
+
+.knowledge-nav-preview .kn-warn {
+	background: var(--background-modifier-error);
+	color: var(--text-on-accent);
+}

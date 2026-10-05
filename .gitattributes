@@ -1,0 +1,12 @@
+# Normalize line endings to LF in the repository.
+# Without this, Git on Windows rewrites every source file to CRLF on checkout,
+# and the next commit shows the entire file as changed.
+* text=auto eol=lf
+
+# Binary assets must never be touched.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.zip binary

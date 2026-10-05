@@ -5,7 +5,7 @@ import builtins from "builtin-modules";
 const banner = `/*
 Knowledge Nav — an Obsidian plugin.
 This file is generated from TypeScript sources in ./src by esbuild.
-Source: https://github.com/SusuYF/Automatic-summary-and-two-way-linking
+Source: https://github.com/SusuYF/Automatically-generate-knowledge-point-links
 */`;
 
 const prod = process.argv[2] === "production";

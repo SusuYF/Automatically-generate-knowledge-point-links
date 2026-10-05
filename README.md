@@ -49,7 +49,8 @@ an ordinary TOC plugin is the better tool and you should use one.
 
 Not yet in the community directory. To install manually:
 
-1. Download `main.js`, `manifest.json` and `styles.css` from the latest release.
+1. Download `main.js`, `manifest.json` and `styles.css` from the
+   [latest release](https://github.com/SusuYF/Automatically-generate-knowledge-point-links/releases/latest).
 2. Put them in `<your-vault>/.obsidian/plugins/knowledge-nav/`.
 3. Reload Obsidian and enable **Knowledge Nav** in Settings → Community plugins.
 

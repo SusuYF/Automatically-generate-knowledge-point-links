@@ -1,15 +1,17 @@
-# Knowledge Nav
+# 🧭 Knowledge Nav
 
-Generate a knowledge-point-level navigation block at the top of an Obsidian note.
+**A table of contents tells you where things are. This tells you what's there.**
 
-A table of contents copies your headings. This does something different: it reads the
-note and produces an index of the **knowledge points** inside it. Each link's display
-text is a distilled statement, and the anchor points at the section it came from.
-Hover a link to preview that section without losing your place.
+Knowledge Nav reads a note and generates a navigation block where every link's display
+text is a *distilled statement* — not a heading copied verbatim. Each one points at the
+section it came from. Hover to preview that section without losing your place.
 
-## What it looks like
+It lives in a collapsed callout at the top of the note, so it costs zero screen space
+until you want it.
 
-Given a note like this:
+## 👀 What it looks like
+
+Feed it a note like this:
 
 ```markdown
 # Spaced repetition
@@ -22,7 +24,7 @@ beats re-reading by roughly a factor of two. Confidence correlates only weakly
 with actual accuracy.
 ```
 
-the plugin writes this at the top:
+and you get this at the top:
 
 ```markdown
 > [!abstract] 导航
@@ -32,95 +34,98 @@ the plugin writes this at the top:
 > - [[#Why memory fails|Confidence correlates only weakly with accuracy]]
 ```
 
-The nav block is a callout, so it is collapsed by default and costs no screen space.
+Three links, three things you can actually remember. A normal TOC would have handed you
+`Why memory fails` and called it a day.
 
-## Why not just a TOC
+## 🤔 Why not just a TOC
 
-| | Ordinary TOC plugin | Knowledge Nav |
+| | Ordinary TOC plugin | 🧭 Knowledge Nav |
 |---|---|---|
 | What it lists | Your headings, verbatim | Distilled knowledge points |
-| Works on a note with no headings | No — produces one line | Yes — splits the body into sections |
+| Note has no headings | Produces one sad line | Splits the body into sections |
 | Reads the note's meaning | No | Yes |
 
-If your notes are already well-sectioned and you just want a clickable outline,
-an ordinary TOC plugin is the better tool and you should use one.
+**If your notes are already well-sectioned and you just want a clickable outline,
+an ordinary TOC plugin is the better tool and you should use one.** This is for the
+other case: the 3000-word note you wrote as a wall of text and now can't navigate.
 
-## Install
+## 📦 Install
 
-Not yet in the community directory. To install manually:
+Not in the community directory yet. Manual install:
 
-1. Download `main.js`, `manifest.json` and `styles.css` from the
+1. Grab `main.js`, `manifest.json` and `styles.css` from the
    [latest release](https://github.com/SusuYF/Automatically-generate-knowledge-point-links/releases/latest).
-2. Put them in `<your-vault>/.obsidian/plugins/knowledge-nav/`.
-3. Reload Obsidian and enable **Knowledge Nav** in Settings → Community plugins.
+2. Drop them into `<your-vault>/.obsidian/plugins/knowledge-nav/`.
+3. Reload Obsidian, then enable **Knowledge Nav** in Settings → Community plugins.
 
-## Setup
+## ⚙️ Setup
 
-Open **Settings → Knowledge Nav** and fill in three fields:
+Open **Settings → Knowledge Nav**. Three fields, then you're done:
 
-- **API base URL** — any OpenAI-compatible endpoint. Examples:
-  `https://api.deepseek.com/v1`, `https://api.moonshot.cn/v1`,
-  `http://localhost:11434/v1` (Ollama).
-- **API key** — from your provider.
-- **Model** — e.g. `deepseek-chat`, `kimi-k2-0905-preview`, `qwen2.5:14b`.
+| Field | What to put |
+|---|---|
+| **API base URL** | Any OpenAI-compatible endpoint — `https://api.deepseek.com/v1`, `https://api.moonshot.cn/v1`, `http://localhost:11434/v1` (Ollama)… |
+| **API key** | From your provider |
+| **Model** | `deepseek-chat`, `kimi-k2-0905-preview`, `qwen2.5:14b`… |
 
-Press **Test** to confirm all three line up before using it on a note.
+Hit **Test** to confirm all three line up before you waste a note on them.
 
-Then open a note and run **Knowledge Nav: Generate navigation for current note**
-from the command palette.
+Then open a note and run **Knowledge Nav: Generate navigation for current note** from
+the command palette. You'll get a preview — nothing touches your vault until you say so.
 
-## Network use
+## 🔒 Network use
 
-**This plugin sends your note text to an LLM endpoint that you configure.**
+**This plugin sends your note text to an LLM endpoint that you configure.** In full:
 
-- **Which service.** Whatever you enter as the API base URL. The plugin ships with no
-  default endpoint and contacts nothing on its own.
-- **What is sent.** The full text of the note you run the command on, plus the prompt.
-  Nothing else.
-- **What is not sent.** No other notes, no vault metadata, no file names, no usage data.
-- **No telemetry of any kind.** Nothing is collected or reported anywhere.
-- **API key storage.** Stored in the plugin's `data.json` inside your vault, in plain
-  text — the same convention other Obsidian plugins use. It is sent only as an
+- **Which service.** Whatever you type into the API base URL. The plugin ships with no
+  default endpoint and phones home to nobody.
+- **What gets sent.** The text of the note you ran it on, plus the prompt. That's it.
+- **What doesn't.** No other notes. No vault metadata. No file names. No usage data.
+- **No telemetry.** Nothing is collected, reported, or phoned anywhere.
+- **Your API key** lives in the plugin's `data.json` inside your vault, in plain text —
+  the same convention every other Obsidian plugin uses. It goes out only as an
   `Authorization` header to the endpoint above.
-- **Nothing is written to your vault until you press Apply.** Generated results are
-  shown in a preview first, with the validation report attached.
+- **Nothing is written until you press Apply.** You see the result and the validation
+  report first.
 
-If you point the base URL at a local Ollama instance, no data leaves your machine.
+Point the base URL at a local Ollama instance and nothing leaves your machine at all.
 
-## Known limitations
+## ⚠️ Known limitations
 
-Stated plainly, because they affect whether this is the right tool for you:
+Stated plainly, because they decide whether this tool is right for you:
 
-- **Links jump to the section, not the exact line.** Several knowledge points under
-  one heading all lead to the same place. This is a deliberate trade-off: precision
-  would require inserting block IDs on individual lines, which makes the note source
-  much noisier. Navigation here is designed for *scanning* (with Page preview hover),
-  not for precise jumping. Requires the core **Page preview** plugin to be enabled.
-- **Output quality depends on the model.** Small local models produce noticeably worse
-  nav blocks than frontier models. The validation report tells you when a result is
-  structurally broken, but it cannot tell you whether the knowledge points are *good*.
-- **It costs money per note** if you use a paid API. One call per note, no batching.
-- **Heading insertion modifies your note body.** When a long note has almost no
-  subheadings, the plugin may insert `##` headings so the nav has something to point
-  at. Only heading lines are inserted — the note's own text is never touched, and the
-  plugin verifies this after writing. You can disable it in settings.
-- **Only Markdown notes.** No Canvas, no PDF.
+- **🔗 Links jump to the section, not the exact line.** Five knowledge points under one
+  heading all land in the same place. This is deliberate: pinning to exact lines needs
+  block IDs on individual lines, which turns your clean note source into noise. This
+  design is built for *scanning* (hover preview), not precision jumping. **Requires the
+  core Page preview plugin to be enabled** — without it you get links you can't peek at.
+- **🧠 Output quality is the model's, not ours.** A small local model produces
+  noticeably worse nav blocks than a frontier model. The validation report catches
+  structural breakage; it cannot tell you whether a knowledge point is *good*.
+- **💸 One API call per note**, billed by your provider. No batching, no caching.
+- **✂️ Heading insertion touches your note body.** When a long note has almost no
+  subheadings, the plugin may insert `##` headings so the nav has something to point at.
+  Only heading lines are inserted — your prose is never touched, and the plugin verifies
+  this after writing. Don't like it? Turn it off in settings.
+- **📝 Markdown notes only.** No Canvas, no PDF, no databases.
 
-## Development
+## 🛠 Development
 
 ```bash
 npm install
 npm run dev     # watch mode, rebuilds main.js on change
 npm run build   # type-check + production bundle
+npm test        # 29 unit tests, no network needed
 ```
 
-To test against a real vault, symlink or copy the repo into
+To try it against a real vault, symlink or copy the repo into
 `<vault>/.obsidian/plugins/knowledge-nav/` and enable it.
 
-The validation rules live in `src/core.ts`. They are deliberately computed rather than
-asked of the model — in testing, the model's own counts were wrong twice (reported 40
-items when there were 43; flagged six valid entries as over-width).
+The validation rules live in `src/core.ts`. They are **computed, never asked of the
+model** — in testing the model's own item count was wrong twice (claimed 40 when there
+were 43; flagged six perfectly good entries as over-width). Counting is a solved problem;
+don't outsource it to a language model.
 
-## License
+## 📄 License
 
-MIT — see [LICENSE](./LICENSE).
+MIT — see [LICENSE](./LICENSE). Go build something with it.
